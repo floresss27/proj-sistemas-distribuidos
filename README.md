@@ -80,7 +80,7 @@ Antes de instalar as dependências do projeto, certifique-se de ter os seguintes
 ### 1. Clone o repositório
 
 ```bash
-git clone <url-do-repositorio>
+git clone https://github.com/floresss27/proj-sistemas-distribuidos.git
 cd proj-sistemas-distribuidos
 ```
 
