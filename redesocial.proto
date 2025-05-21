@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package redesocial;
+
+option go_package = "proj-sistemas-distribuidos/redesocial;redesocial";
+
+service SocialNetwork {
+  // Funcionalidades principais
+  rpc CreatePost(Post) returns (Ack) {}
+  rpc SendDirectMessage(DirectMessage) returns (Ack) {}
+  rpc ConnectUsers(FollowRequest) returns (Ack) {}
+  rpc SubscribeToUpdates(NotificationRequest) returns (stream Notification) {}
+  rpc SyncTime(ClockSyncRequest) returns (ClockSyncResponse) {}
+
+  // Replicação entre servidores
+  rpc ReplicatePost(Post) returns (Ack) {}
+  rpc ReplicateDirectMessage(DirectMessage) returns (Ack) {}
+  rpc ReplicateFollow(FollowRequest) returns (Ack) {}
+}
+
+message Post {
+  string user = 1;
+  string content = 2;
+  int64 timestamp = 3;
+}
+
+message DirectMessage {
+  string sender = 1;
+  string receiver = 2;
+  string message = 3;
+  int64 timestamp = 4;
+}
+
+message Notification {
+  string user = 1;
+  string content = 2;
+  int64 timestamp = 3;
+}
+
+message FollowRequest {
+  string follower = 1;
+  string followee = 2;
+}
+
+message NotificationRequest {
+  string user = 1;
+}
+
+message ClockSyncRequest {
+  string serverId = 1;
+  int64 localTime = 2;
+}
+
+message ClockSyncResponse {
+  int64 adjustedTime = 1;
+}
+
+message Ack {
+  bool success = 1;
+  string message = 2;
+}

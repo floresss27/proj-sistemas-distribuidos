@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+.venv/
+*.egg-info/
+
+# Node.js
+node_modules/
+package-lock.json
+npm-debug.log
+
+# Go
+bin/
+*.exe
+*.test
+*.out
+
+# Arquivos gerados pelo gRPC/Protobuf
+*.pb.go
+*.pb.py
+*_pb2.py
+*_pb2_grpc.py
+
+# Logs
+*.log
+server_log_*.txt
+cliente_node.log
+
+.history
