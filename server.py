@@ -19,10 +19,21 @@ class SocialMediaService(redesocial_pb2_grpc.SocialNetworkServicer):
         self._time_offset = 0
         self.thread_lock = threading.Lock()
         self.log_file = f"server_log_{instance_id}.txt"
-        logging.basicConfig(filename=self.log_file, level=logging.INFO)
+        
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(asctime)s - %(levelname)s - %(message)s',
+            handlers=[
+                logging.FileHandler(self.log_file),
+                logging.StreamHandler(sys.stdout)
+            ],
+            force=True
+        )
 
     def log_event(self, message):
-        print(f"[{self.instance_id}] {message}")
+        formatted_message = f"[{self.instance_id}] {message}"
+        sys.stdout.write(formatted_message + "\n")
+        sys.stdout.flush()
         logging.info(message)
 
     def get_current_time(self):
